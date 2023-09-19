@@ -1,0 +1,40 @@
+
+# @name get-prompts
+GET http://localhost:3333/prompts
+
+###
+
+# @name upload-video
+POST http://localhost:3333/videos
+Content-Type: multipart/form-data; boundary=----WebKitFormBOndary7MA4YWxKTrZu0gW
+
+------WebKitFormBOndary7MA4YWxKTrZu0gW
+Content-Disposition: form-data; name="file"; filename="exemple.mp3"
+Content-Type: audio/mpeg
+
+./exemple.mp3
+------WebKitFormBOndary7MA4YWxKTrZu0gW--
+
+###
+
+# @name create-transcription
+
+POST https:/localhost:3333/videos/22988a27-70ee-447f-986d-a11277b22008/transcription
+Content-Type: application/json
+
+{
+    "prompt": "Ask for money, angry"
+}
+
+###
+
+# @name generate-ai-completion
+
+POST https:/localhost:3333/ai/complete
+Content-Type: application/json
+
+{
+    "videoId": "3c13f5db-86e0-484d-9ea9-c871acfa0577",
+    "temperature": 0.5,
+    "prompt": "Gere um resumo sucinto da transcrição do vídeo informada a seguir: '''{transcription}''' "
+}
